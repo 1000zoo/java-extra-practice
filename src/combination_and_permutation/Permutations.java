@@ -52,4 +52,23 @@ public class Permutations {
         }
     }
 
+    public List<List<Integer>> getListPermutationsWithDuplicates(int[] arr, int length) {
+        List<List<Integer>> result = new ArrayList<>();
+        recursionForDuplicates(arr, length, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void recursionForDuplicates(int[] arr, int length, List<Integer> currList, List<List<Integer>> result) {
+        if (currList.size() == length) {
+            result.add(new ArrayList<>(currList));
+            return;
+        }
+
+        for (int i : arr) {
+            currList.add(i);
+            recursionForDuplicates(arr, length, currList, result);
+            currList.remove(currList.size() - 1);
+        }
+    }
+
 }

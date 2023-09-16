@@ -28,4 +28,28 @@ public class Permutations {
         }
     }
 
+    /*
+    String array 의 원소들 나열 (array 내에 중복된 원소는 없다고 가정)
+     */
+
+    public List<List<String>> getAllListOfPermutations(String[] arr) {
+        List<List<String>> result = new ArrayList<>();
+        recursion(arr, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void recursion(String[] arr, List<String> currList, List<List<String>> result) {
+        if (currList.size() == arr.length) {
+            result.add(new ArrayList<>(currList));
+            return;
+        }
+
+        for (String s : arr) {
+            if (currList.contains(s)) continue;
+            currList.add(s);
+            recursion(arr, currList, result);
+            currList.remove(currList.size() - 1);
+        }
+    }
+
 }
